@@ -14,9 +14,10 @@ export function PreviewTab({ icon, pathname }: PreviewTabProps) {
   };
 
   return (
-    <ScrollArea className="h-full w-full">
+   
       <div  className="space-y-3 sm:space-y-3 p-2 sm:p-4">
-        <div style={{ border: "1px solid blue" }} className="flex items-center justify-center p-3 sm:p-5 bg-muted/50 rounded-lg h-[150px] ">
+        <div className="flex w-full items-center justify-center p-3 sm:p-5 bg-muted/50 rounded-lg h-[150px] ">
+
 
           <div className="w-16 h-16 sm:w-32 sm:h-20 flex items-center justify-center">
             <IconRenderer iconData={icon.content} />
@@ -51,6 +52,5 @@ export function PreviewTab({ icon, pathname }: PreviewTabProps) {
           </div>
         </div>
       </div>
-    </ScrollArea>
   );
 } 
