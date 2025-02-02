@@ -14,6 +14,7 @@ export function Sidebar() {
   const router = useRouter()
   const handleRedirect = (e: React.MouseEvent<HTMLButtonElement>,library: IconLibrary) => {
     e.preventDefault()
+
     setSelectedCategory(library)
     router.push(`/${library}`)
   }
@@ -37,10 +38,11 @@ export function Sidebar() {
         >
           Home
         </Button>
-        {navItems?.sort().sort((a,b) => a.value < b.value).map((item, index) => {
+        {navItems?.sort((a: string, b: string) => a.localeCompare(b)).map((item: string, index: number) => {
           const libraryName = iconLibraries[item as IconLibrary]
           if(!libraryName) return null
           return(
+
             <Button
               key={index}
               variant="ghost"
@@ -48,7 +50,7 @@ export function Sidebar() {
                 "w-full justify-start",
                 selectedCategory === item && "bg-accent"
               )}
-              onClick={(e) => handleRedirect(e,item)}
+              onClick={(e) => handleRedirect(e,item as IconLibrary)}
             >
               {iconLibraries[item as IconLibrary]}
             </Button>
