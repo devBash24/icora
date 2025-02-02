@@ -20,8 +20,8 @@ export function SearchModal({ open, onOpenChange }: SearchModalProps) {
 
   return (
     <>
-      <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="max-w-5xl w-[95vw] h-[90vh] p-0">
+      <Dialog open={open} onOpenChange={onOpenChange} >
+        <DialogContent className="max-w-5xl w-[95vw] h-[90vh] p-0 rounded-md shadow-md">
           <div className="flex flex-col h-full">
             {/* Search Input */}
             <div className="p-6 border-b">

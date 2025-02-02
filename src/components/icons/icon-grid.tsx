@@ -21,11 +21,12 @@ export function IconGrid({ icons, pathname, setSelectedIcon }: IconGridProps) {
     setIsDialogOpen(true);
   };
 
-  // Calculate number of columns based on screen width
+  // Updated column counts for better mobile display
   const getColumnsCount = () => {
-    if (typeof window === 'undefined') return 6;
+    if (typeof window === 'undefined') return 4;
     const width = window.innerWidth;
-    if (width < 640) return 2; // sm
+    if (width < 480) return 2; // xs
+    if (width < 640) return 3; // sm
     if (width < 768) return 3; // md
     if (width < 1024) return 4; // lg
     return 6;
@@ -36,17 +37,16 @@ export function IconGrid({ icons, pathname, setSelectedIcon }: IconGridProps) {
 
   return (
     <Virtuoso
-      style={{ height: 'calc(100vh - 200px)' }}
+      style={{ height: 'calc(100vh - 180px)' }}
       totalCount={rows}
       itemContent={index => {
         const rowItems = icons.slice(index * columns, (index + 1) * columns);
         
         return (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 sm:gap-4 mb-4">
             {rowItems.map((icon) => (
               <Dialog 
-                key={icon.name} 
-                
+                key={icon.name}
                 open={isDialogOpen && selectedIconData?.name === icon.name}
                 onOpenChange={(open) => {
                   setIsDialogOpen(open);
@@ -56,11 +56,13 @@ export function IconGrid({ icons, pathname, setSelectedIcon }: IconGridProps) {
                 <DialogTrigger asChild>
                   <Button
                     variant="outline"
-                    className="h-24 w-full flex flex-col items-center justify-center gap-2"
+                    className="h-20 sm:h-24 w-full flex flex-col items-center justify-center gap-1 sm:gap-2 p-2 sm:p-4"
                     onClick={() => handleIconClick(icon)}
                   >
-                    <IconRenderer iconData={icon.content} />
-                    <span className="text-xs text-muted-foreground">{icon.name}</span>
+                    <IconRenderer iconData={icon.content} className="w-6 h-6 sm:w-8 sm:h-8" />
+                    <span className="text-[10px] sm:text-xs text-muted-foreground truncate w-full text-center">
+                      {icon.name}
+                    </span>
                   </Button>
                 </DialogTrigger>
                 {selectedIconData && (
@@ -70,22 +72,6 @@ export function IconGrid({ icons, pathname, setSelectedIcon }: IconGridProps) {
             ))}
           </div>
         );
-      }}
-      components={{
-        ScrollSeekPlaceholder: () => (
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-4">
-            {Array(columns).fill(0).map((_, i) => (
-              <div 
-                key={i}
-                className="h-24 w-full bg-muted rounded-md animate-pulse"
-              />
-            ))}
-          </div>
-        ),
-      }}
-      scrollSeekConfiguration={{
-        enter: velocity => Math.abs(velocity) > 500,
-        exit: velocity => Math.abs(velocity) < 100,
       }}
     />
   );

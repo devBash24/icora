@@ -14,10 +14,12 @@ export function CodeTab({ icon }: CodeTabProps) {
 
   return (
     <div className="relative h-full">
-      <ScrollArea className="h-full w-full rounded-md border bg-muted">
+      <ScrollArea className="h-full w-full rounded-md border bg-muted max-h-[40vh] sm:max-h-[45vh]">
         <pre className="p-4 text-sm leading-relaxed flex">
           <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm whitespace-pre-wrap break-all text-left">
             {importStatement()+icon.content}
+
+
 
           </code>
         </pre>

@@ -1,5 +1,5 @@
 // Helper function to convert icon data to SVG
-const IconRenderer = ({ iconData }: { iconData: string }) => {
+const IconRenderer = ({ iconData, className }: { iconData: string, className?: string }) => {
   try {
     // Extract the SVG data from the code string
     const match = iconData.match(/GenIcon\(([\s\S]*?)\)\(props\)/);
@@ -13,6 +13,7 @@ const IconRenderer = ({ iconData }: { iconData: string }) => {
         width="2em"
         height="2em"
         fill="currentColor"
+        className={className}
       >
         {svgData.child.map((child: any, index: number) => (
           <path key={index} {...child.attr} />
