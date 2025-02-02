@@ -29,7 +29,7 @@ export function PreviewTab({ icon, pathname }: PreviewTabProps) {
             >
               <Copy className="mr-2 h-4 w-4 flex-shrink-0" />
 
-              <span className="break-all text-left">npx icora add {pathname}-{icon.name}</span>
+              <span className="break-all text-left">npx icora@latest add {pathname}-{icon.name}</span>
             </Button>
           </div>
           <div>
@@ -38,7 +38,7 @@ export function PreviewTab({ icon, pathname }: PreviewTabProps) {
             <Button 
               variant="secondary" 
               className="w-full font-mono text-xs h-auto py-2.5"
-              onClick={() => copyToClipboard(`import { ${icon.name} } from "@/assets/icons/${pathname}/${pathname}"`)}
+              onClick={() => copyToClipboard(`import { ${icon.name} } from "@/assets/icons/${pathname}/${icon.name}"`)}
             >
               <Copy className="mr-2 h-4 w-4 flex-shrink-0" />
               <span className="break-all text-left">
