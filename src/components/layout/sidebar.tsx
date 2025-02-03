@@ -25,9 +25,9 @@ export function Sidebar() {
   }
 
   return (
-    <div className="w-full md:w-[200px] flex-shrink-0 md:border-r">
+    <div className="w-full md:w-[240px] flex-shrink-0 md:border-r mx-4">
     <ScrollArea className="h-[calc(100vh-3.5rem)] overflow-y-auto py-6 md:py-0">
-      <div className="space-y-1 p-4">
+      <div className="space-y-1 py-4 pr-4">
         <Button
           variant="ghost"
           className={cn(

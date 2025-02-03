@@ -23,19 +23,19 @@ export default function RootLayout({
   return (
     <html lang="en" data-lt-installed="true">
       <QueryProvider>
-      <body >
-      <div className="flex flex-col h-screen max-w-screen">
-  <Header />
-  <div className="flex flex-1 overflow-hidden">
-    <div className="hidden md:block">
-      <Sidebar />
-    </div>
-    <main className="flex-1 overflow-y-auto pb-10">
-      {children}
-    </main>
-  </div>
-</div>
-      </body>
+        <body >
+          <div className="flex flex-col h-screen max-w-screen">
+            <Header />
+            <div className="flex flex-1 overflow-hidden">
+              <div className="hidden md:block">
+                <Sidebar />
+              </div>
+              <main className="flex-1 overflow-y-auto pb-10">
+                {children}
+              </main>
+            </div>
+          </div>
+        </body>
       </QueryProvider>
     </html>
   );
