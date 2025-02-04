@@ -1,10 +1,15 @@
-import { ScrollArea } from "@/components/ui/scroll-area";
+import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
 import { importStatement } from "@/lib/importStatement";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
 
 interface CodeTabProps {
-  icon: any;
+  icon: {
+    content: string;
+    language?: string;
+  };
 }
 
 export function CodeTab({ icon }: CodeTabProps) {
@@ -12,26 +17,42 @@ export function CodeTab({ icon }: CodeTabProps) {
     await navigator.clipboard.writeText(text);
   };
 
+  const fullCode = importStatement() + icon.content;
+
   return (
     <div className="relative h-full">
-      <ScrollArea className="h-full w-full rounded-md border bg-muted max-h-[40vh] sm:max-h-[45vh]">
-        <pre className="p-4 text-sm leading-relaxed flex">
-          <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm whitespace-pre-wrap break-all text-left">
-            {importStatement()+icon.content}
-
-
-
-          </code>
-        </pre>
-      </ScrollArea>
-      <Button 
+      <div className="h-full w-full rounded-md border bg-muted max-h-[40vh] sm:max-h-[45vh] overflow-auto">
+        <SyntaxHighlighter
+          language={icon.language || 'javascript'}
+          style={oneLight}
+          customStyle={{
+            margin: 0,
+            padding: '1rem',
+            backgroundColor: 'hsl(var(--muted))',
+            fontSize: '0.875rem',
+            borderRadius: '0.375rem',
+            wordWrap: 'break-word',
+            whiteSpace: 'pre-wrap',
+            overflowWrap: 'break-word',
+            width: '100%',
+          }}
+          codeTagProps={{
+            className: 'font-source-code-pro break-words whitespace-pre-wrap w-full',
+          }}
+          wrapLines={true}
+          wrapLongLines={true}
+        >
+          {fullCode}
+        </SyntaxHighlighter>
+      </div>
+      <Button
         size="sm"
         variant="secondary"
         className="absolute top-3 right-3"
-        onClick={() => copyToClipboard(importStatement()+icon.content)}
+        onClick={() => copyToClipboard(fullCode)}
       >
         <Copy className="h-4 w-4" />
       </Button>
     </div>
   );
-} 
+}
