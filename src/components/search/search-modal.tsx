@@ -23,14 +23,11 @@ export function SearchModal({ open, onOpenChange }: SearchModalProps) {
     window.addEventListener("keydown", (e) => {
       keyPress.add(e.key.toLowerCase());
       if ((keyPress.has("meta") || keyPress.has("control")) && keyPress.has("k")) {
-        console.log(keyPress)
         onOpenChange(true);
       }
-      console.log(keyPress)
     })
     window.addEventListener("keyup", (e) => {
       keyPress.clear();
-      console.log(keyPress)
     });
     return () => {
       window.removeEventListener("keydown", () => {});

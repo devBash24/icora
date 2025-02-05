@@ -41,7 +41,6 @@ export function IconGrid({ icons, pathname, setSelectedIcon }: IconGridProps) {
       totalCount={rows}
       itemContent={index => {
         const rowItems = icons.slice(index * columns, (index + 1) * columns);
-        console.log(rowItems)
         return (
           <div className="w-full flex flex-wrap justify-start items-start gap-2 sm:gap-4 mb-4">
             {icons.map((icon) => (
