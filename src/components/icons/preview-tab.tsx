@@ -29,7 +29,7 @@ export function PreviewTab({ icon, pathname }: PreviewTabProps) {
             <p className="text-xs sm:text-sm font-medium mb-1.5 sm:mb-">Add to your project</p>
             <Button 
               variant="secondary" 
-              className="w-full font-mono text-[10px] sm:text-xs h-auto py-2 sm:py-2.5"
+              className="w-full font-mono text-[10px] sm:text-xs h-auto py-2 sm:py-2.5 text-wrap"
               onClick={() => copyToClipboard(`npx icora add ${pathname}-${icon.name}`)}
             >
               <Copy className="mr-2 h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
@@ -41,7 +41,7 @@ export function PreviewTab({ icon, pathname }: PreviewTabProps) {
             <p className="text-xs sm:text-sm font-medium mb-1.5 sm:mb-2">Import in your code</p>
             <Button 
               variant="secondary" 
-              className="w-full font-mono text-[10px] sm:text-xs h-auto py-2 sm:py-2.5"
+              className="w-full font-mono text-[10px] sm:text-xs h-auto py-2 sm:py-2.5 text-wrap"
               onClick={() => copyToClipboard(`import { ${icon.name} } from "@/assets/icons/${pathname}/${icon.name}"`)}
             >
               <Copy className="mr-2 h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
