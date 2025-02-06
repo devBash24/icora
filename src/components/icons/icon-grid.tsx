@@ -41,10 +41,9 @@ export function IconGrid({ icons, pathname, setSelectedIcon }: IconGridProps) {
       totalCount={rows}
       itemContent={index => {
         const rowItems = icons.slice(index * columns, (index + 1) * columns);
-        
         return (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 sm:gap-4 mb-4">
-            {rowItems.map((icon) => (
+          <div className="w-full flex flex-wrap justify-start items-start gap-2 sm:gap-4 mb-4">
+            {icons.map((icon) => (
               <Dialog 
                 key={icon.name}
                 open={isDialogOpen && selectedIconData?.name === icon.name}
@@ -56,7 +55,7 @@ export function IconGrid({ icons, pathname, setSelectedIcon }: IconGridProps) {
                 <DialogTrigger asChild>
                   <Button
                     variant="outline"
-                    className="h-20 sm:h-24 w-full flex flex-col items-center justify-center gap-1 sm:gap-2 p-2 sm:p-4"
+                    className="h-20 sm:h-24 w-[8rem] max-sm:w-full flex flex-col items-center justify-center gap-1 sm:gap-2 p-2 sm:p-4"
                     onClick={() => handleIconClick(icon)}
                   >
                     <IconRenderer iconData={icon.content} className="w-6 h-6 sm:w-8 sm:h-8" />

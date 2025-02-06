@@ -10,10 +10,10 @@ export default function LibraryPage() {
   const { data: icons, isLoading, setSelectedIcon } = useFetchIconLibrary(pathname);
 
   return (
-    <div className="flex flex-col min-h-screen h-full overflow-y-auto px-7">
-      <main className="flex-1 overflow-y-auto">
-        <div className="container py-6 px-8">
-          <div className="space-y-8">
+    <div className="w-full flex flex-col min-h-screen h-full overflow-y-auto px-7">
+      <main className="w-full flex-1 overflow-y-auto">
+        <div className="w-full container py-6 px-8">
+          <div className="w-full space-y-8">
             <h1 className="text-3xl font-bold capitalize">
               {iconLibraries[pathname as IconLibrary]}
             </h1>

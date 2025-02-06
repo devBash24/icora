@@ -6,7 +6,7 @@ import { Virtuoso } from "react-virtuoso"
 import useSearch from "@/hooks/useSearch"
 import IconRenderer from "../icons/render"
 import { IconDialog } from "../icons/icon-dialog"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 interface SearchModalProps {
   open: boolean
@@ -15,8 +15,25 @@ interface SearchModalProps {
 
 export function SearchModal({ open, onOpenChange }: SearchModalProps) {
   const { searchQuery, setSearchQuery, allIcons, loadMore, hasNextPage, isFetchingNextPage, isLoading } = useSearch()
-  const [selectedIcon, setSelectedIcon] = useState<any>(null)
-  const [showIconDialog, setShowIconDialog] = useState(false)
+  const [selectedIcon, setSelectedIcon] = useState<any>(null);
+  const [showIconDialog, setShowIconDialog] = useState(false);
+  const [keyPress, setKeyPress] = useState<Set<string>>(new Set<string>());
+
+  useEffect(() => {
+    window.addEventListener("keydown", (e) => {
+      keyPress.add(e.key.toLowerCase());
+      if ((keyPress.has("meta") || keyPress.has("control")) && keyPress.has("k")) {
+        onOpenChange(true);
+      }
+    })
+    window.addEventListener("keyup", (e) => {
+      keyPress.clear();
+    });
+    return () => {
+      window.removeEventListener("keydown", () => {});
+      window.removeEventListener("keyup",() => {});
+    }
+  },[keyPress])
 
   return (
     <>
@@ -52,7 +69,7 @@ export function SearchModal({ open, onOpenChange }: SearchModalProps) {
                     overscan={200}
                     className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 p-4"
                     itemContent={(index, icon) => (
-                      <div 
+                      <div
                         key={`${icon.library}-${icon.name}-${index}`}
                         className="flex flex-col items-center p-4 rounded-lg border hover:bg-muted/50 cursor-pointer transition-colors"
                         onClick={() => {
@@ -68,7 +85,7 @@ export function SearchModal({ open, onOpenChange }: SearchModalProps) {
                       </div>
                     )}
                     components={{
-                      Footer: () => 
+                      Footer: () =>
                         isFetchingNextPage ? (
                           <div className="flex justify-center p-4 col-span-full">
                             <Loader2 className="h-6 w-6 animate-spin" />
@@ -99,8 +116,8 @@ export function SearchModal({ open, onOpenChange }: SearchModalProps) {
 
       <Dialog open={showIconDialog} onOpenChange={setShowIconDialog}>
         {selectedIcon && (
-          <IconDialog 
-            icon={selectedIcon} 
+          <IconDialog
+            icon={selectedIcon}
             pathname={selectedIcon.library.toLowerCase()}
           />
         )}
