@@ -5,12 +5,12 @@ import { Github, Search } from "lucide-react"
 import { useState } from "react"
 import { SearchModal } from "@/components/search/search-modal"
 import { MobileNav } from "./mobile-nav"
-
+import IconsCart from "../icons/iconsCart"
 export function Header() {
   const [searchOpen, setSearchOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-4">
       <div className="container flex h-14 items-center">
         <div className="flex items-center gap-2 px-6">
           <MobileNav />
@@ -58,6 +58,7 @@ export function Header() {
                 <Github className="h-5 w-5" />
               </Link>
             </Button>
+            <IconsCart /> 
           </nav>
         </div>
       </div>

@@ -4,16 +4,20 @@ import IconRenderer from "@/components/icons/render";
 import { IconDialog } from "./icon-dialog";
 import { useState } from "react";
 import { Virtuoso } from 'react-virtuoso';
+import { useIconCart } from "@/context/iconCartProvider";
+import { IconData } from "@/hooks/useFetchIconLibrary";
 
 interface IconGridProps {
-  icons: any[];
+  icons: IconData[];
   pathname: string;
-  setSelectedIcon: (icon: any) => void;
+  setSelectedIcon: (icon: IconData) => void;
 }
+
 
 export function IconGrid({ icons, pathname, setSelectedIcon }: IconGridProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedIconData, setSelectedIconData] = useState<any>(null);
+  const {addRemoveIcon, multiSelect} = useIconCart()
 
   const handleIconClick = (icon: any) => {
     setSelectedIconData(icon);
@@ -65,7 +69,7 @@ export function IconGrid({ icons, pathname, setSelectedIcon }: IconGridProps) {
                   </Button>
                 </DialogTrigger>
                 {selectedIconData && (
-                  <IconDialog icon={selectedIconData} pathname={pathname} />
+                  <IconDialog icon={selectedIconData} multiSelect={multiSelect} pathname={pathname} addToCart={addRemoveIcon} />
                 )}
               </Dialog>
             ))}
