@@ -1,17 +1,24 @@
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
 import IconRenderer from "./render";
+import { toast } from "@/hooks/use-toast";
+import { IconData } from "@/hooks/useFetchIconLibrary";
 
 interface PreviewTabProps {
-  icon: any;
+  icon: IconData;
   pathname: string;
 }
+
 
 export function PreviewTab({ icon, pathname }: PreviewTabProps) {
   const copyToClipboard = async (text: string) => {
     await navigator.clipboard.writeText(text);
+    toast({
+      title: "Copied to clipboard",
+      description: "Installation command has been copied to clipboard",
+    })
   };
+
 
   return (
    
@@ -30,8 +37,9 @@ export function PreviewTab({ icon, pathname }: PreviewTabProps) {
             <Button 
               variant="secondary" 
               className="w-full font-mono text-[10px] sm:text-xs h-auto py-2 sm:py-2.5 text-wrap"
-              onClick={() => copyToClipboard(`npx icora add ${pathname}-${icon.name}`)}
+              onClick={() => copyToClipboard(`npx icora@latest add ${pathname}-${icon.name}`)}
             >
+
               <Copy className="mr-2 h-3 w-3 sm:h-4 sm:w-4 flex-shrink-0" />
               <span className="break-all text-left">npx icora@latest add {pathname}-{icon.name}</span>
             </Button>
