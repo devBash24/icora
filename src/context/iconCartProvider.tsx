@@ -53,7 +53,6 @@ const IconCartProvider = ({ children }: { children: React.ReactNode }) => {
         }
     }, [isInCart])
 
-    // Memoize clearCart function
     const clearCart = useCallback(() => {
         setCartIcons([])
     }, [])
@@ -61,7 +60,7 @@ const IconCartProvider = ({ children }: { children: React.ReactNode }) => {
     // Memoize cartTotal to prevent unnecessary recalculations
     const cartTotal = useMemo(() => cartIcons.length, [cartIcons])
 
-    // Memoize the context value to prevent unnecessary re-renders
+    // Memoize the context value to prevent unnecessary re-renders, --adjust create command function
     const contextValue = useMemo(() => ({
         cartIcons,
         createCommand,
