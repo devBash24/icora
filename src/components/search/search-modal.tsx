@@ -7,6 +7,7 @@ import useSearch from "@/hooks/useSearch"
 import IconRenderer from "../icons/render"
 import { IconDialog } from "../icons/icon-dialog"
 import { useEffect, useState } from "react"
+import { useIconCart } from "@/context/iconCartProvider"
 
 interface SearchModalProps {
   open: boolean
@@ -14,10 +15,11 @@ interface SearchModalProps {
 }
 
 export function SearchModal({ open, onOpenChange }: SearchModalProps) {
-  const { searchQuery, setSearchQuery, allIcons, loadMore, hasNextPage, isFetchingNextPage, isLoading } = useSearch()
+  const { searchQuery, setSearchQuery, allIcons, loadMore, isFetchingNextPage, isLoading } = useSearch()
   const [selectedIcon, setSelectedIcon] = useState<any>(null);
   const [showIconDialog, setShowIconDialog] = useState(false);
   const [keyPress, setKeyPress] = useState<Set<string>>(new Set<string>());
+  const { addRemoveIcon,multiSelect } = useIconCart()
 
   useEffect(() => {
     window.addEventListener("keydown", (e) => {
@@ -33,7 +35,7 @@ export function SearchModal({ open, onOpenChange }: SearchModalProps) {
       window.removeEventListener("keydown", () => {});
       window.removeEventListener("keyup",() => {});
     }
-  },[keyPress])
+  },[keyPress, onOpenChange])
 
   return (
     <>
@@ -119,7 +121,10 @@ export function SearchModal({ open, onOpenChange }: SearchModalProps) {
           <IconDialog
             icon={selectedIcon}
             pathname={selectedIcon.library.toLowerCase()}
+            addToCart={addRemoveIcon}
+            multiSelect={multiSelect}
           />
+
         )}
       </Dialog>
     </>

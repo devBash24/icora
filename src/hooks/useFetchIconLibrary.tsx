@@ -5,11 +5,9 @@ export interface IconData {
     content: string;
     name: string;
   }
-  
 
 const useFetchIconLibrary = (libraryName: string) => {
     const [selectedIcon, setSelectedIcon] = useState<IconData | null>(null);
-  
     const { data, isLoading, error } = useQuery({
         queryKey: ["icon-library", libraryName],
         queryFn: async () => {

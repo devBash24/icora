@@ -3,6 +3,7 @@ import { Sidebar } from "@/components/layout/sidebar";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import QueryProvider from "@/context/queryProvider";
+import { IconCartProvider } from "@/context/iconCartProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en" data-lt-installed="true">
       <QueryProvider>
+        <IconCartProvider>
         <body >
           <div className="flex flex-col h-screen max-w-screen">
             <Header />
@@ -35,8 +37,10 @@ export default function RootLayout({
               </main>
             </div>
           </div>
-        </body>
+          </body>
+        </IconCartProvider>
       </QueryProvider>
     </html>
+
   );
 }

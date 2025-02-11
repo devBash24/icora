@@ -4,7 +4,7 @@ import { Copy } from "lucide-react";
 import { importStatement } from "@/lib/importStatement";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { oneLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
-
+import { toast } from '@/hooks/use-toast';
 interface CodeTabProps {
   icon: {
     content: string;
@@ -15,7 +15,12 @@ interface CodeTabProps {
 export function CodeTab({ icon }: CodeTabProps) {
   const copyToClipboard = async (text: string) => {
     await navigator.clipboard.writeText(text);
+    toast({
+      title: "Copied to clipboard",
+      description: "Installation command has been copied to clipboard",
+    })
   };
+
 
   const fullCode = importStatement() + icon.content;
 
