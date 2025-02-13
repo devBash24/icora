@@ -23,9 +23,9 @@ export default function RootLayout({
 
   return (
     <html lang="en" data-lt-installed="true">
+        <body >
       <QueryProvider>
         <IconCartProvider>
-        <body >
           <div className="flex flex-col h-screen max-w-screen">
             <Header />
             <div className="flex flex-1 overflow-hidden">
@@ -37,9 +37,9 @@ export default function RootLayout({
               </main>
             </div>
           </div>
-          </body>
         </IconCartProvider>
       </QueryProvider>
+          </body>
     </html>
 
   );
