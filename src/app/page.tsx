@@ -1,5 +1,6 @@
 import ExampleSection from "@/components/section/example";
 import DocsSection from "@/components/section/docs";
+import { Feedback } from "@/components/feedback/feedback"
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
               </div>
               <DocsSection />
               <ExampleSection />
+              <Feedback />
             </div>
           </div>
         </main>
