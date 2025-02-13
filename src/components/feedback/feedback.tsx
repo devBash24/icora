@@ -48,6 +48,7 @@ export function Feedback() {
   }
 
   return (
+    <div className="container max-w-4xl py-2 sm:py-4 space-y-4 sm:space-y-8 px-2 sm:px-4">
     <Card className="p-4 sm:p-6">
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="space-y-2">
@@ -77,5 +78,6 @@ export function Feedback() {
         </Button>
       </form>
     </Card>
+    </div>
   )
 }
