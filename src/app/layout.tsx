@@ -32,7 +32,7 @@ export default function RootLayout({
               <div className="hidden md:block">
                 <Sidebar />
               </div>
-              <main className="flex-1 overflow-y-auto pb-10">
+              <main className="flex-1 overflow-y-hidden pb-10">
                 {children}
               </main>
             </div>
