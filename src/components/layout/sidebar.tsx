@@ -4,26 +4,19 @@ import { IconLibrary } from "@/data/icon-libraries";
 import { iconLibraries } from "@/data/icon-libraries";
 import { cn } from "@/lib/utils";
 import { ScrollArea } from "@radix-ui/react-scroll-area";
-import { SidebarSkeleton } from "./sidebar-skeleton";
 import { useRouter } from "next/navigation";
-import useFetchNavItems from "@/hooks/fetchNavItems";
+import { useState } from "react";
+import { use } from "react";
 
-
-export function Sidebar() {
-  const { navItems, loading, selectedCategory, setSelectedCategory } = useFetchNavItems()
+export function RenderSidebar({data}:{data:Promise<{data:string[]}>}) {
+  const {data:items} = use(data)
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const router = useRouter()
   const handleRedirect = (e: React.MouseEvent<HTMLButtonElement>,library: IconLibrary) => {
     e.preventDefault()
-
     setSelectedCategory(library)
     router.push(`/${library}`)
   }
-
-
-  if (loading) {
-    return <SidebarSkeleton />;
-  }
-
   return (
     <div className="w-full md:w-[240px] flex-shrink-0 md:border-r mx-4">
     <ScrollArea className="h-[calc(100vh-3.5rem)] overflow-y-auto py-6 md:py-0">
@@ -38,7 +31,7 @@ export function Sidebar() {
         >
           Home
         </Button>
-        {navItems?.sort((a: string, b: string) => a.localeCompare(b)).map((item: string, index: number) => {
+        {items?.sort((a: string, b: string) => a.localeCompare(b)).map((item: string, index: number) => {
           const libraryName = iconLibraries[item as IconLibrary]
           if(!libraryName) return null
           return(
@@ -52,7 +45,7 @@ export function Sidebar() {
               )}
               onClick={(e) => handleRedirect(e,item as IconLibrary)}
             >
-              {iconLibraries[item as IconLibrary]}
+              {libraryName}
             </Button>
           )
         })}

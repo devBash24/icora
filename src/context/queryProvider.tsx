@@ -1,7 +1,13 @@
 "use client";
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Toaster } from "@/components/ui/toaster";
+import dynamic from "next/dynamic";
+const Toaster = dynamic(
+  () => import("@/components/ui/toaster").then((mod) => mod.Toaster),
+  {
+    ssr: false,
+  }
+);
 
 const queryClient = new QueryClient();
 

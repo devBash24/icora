@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
 import IconRenderer from "./render";
 import { toast } from "@/hooks/use-toast";
-import { IconData } from "@/hooks/useFetchIconLibrary";
+import { IconData } from "@/lib/types";
 
 interface PreviewTabProps {
   icon: IconData;

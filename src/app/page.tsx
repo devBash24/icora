@@ -1,6 +1,16 @@
-import ExampleSection from "@/components/section/example";
-import DocsSection from "@/components/section/docs";
-import { Feedback } from "@/components/feedback/feedback"
+import dynamic from 'next/dynamic'
+export const revalidate = 3600 
+const ExampleSection = dynamic(() => import('@/components/section/example'), {
+  loading: () => <div className="animate-pulse h-48 bg-muted rounded-lg" />
+})
+
+const DocsSection = dynamic(() => import('@/components/section/docs'), {
+  loading: () => <div className="animate-pulse h-48 bg-muted rounded-lg" />
+})
+
+const Feedback = dynamic(() => import('@/components/feedback/feedback').then(mod => mod.Feedback), {
+  loading: () => <div className="animate-pulse h-48 bg-muted rounded-lg" />
+})
 
 export default function Home() {
   return (

@@ -1,10 +1,17 @@
 "use client"
 import { Button } from "@/components/ui/button"
 import { Code } from "lucide-react"
-import SyntaxHighlighter from "react-syntax-highlighter"
 import { oneLight } from "react-syntax-highlighter/dist/esm/styles/prism"
 import { useState } from "react"
+import dynamic from 'next/dynamic'
 
+const SyntaxHighlighter = dynamic(
+  () => import('react-syntax-highlighter').then((mod) => mod.default),
+  {
+    loading: () => <div className="animate-pulse h-32 bg-muted rounded-lg" />,
+    ssr: false
+  }
+)
 interface CodeExampleProps {
   title: string
   description: string

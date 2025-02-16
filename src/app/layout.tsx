@@ -1,10 +1,9 @@
 import { Header } from "@/components/layout/header";
-import { Sidebar } from "@/components/layout/sidebar";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import QueryProvider from "@/context/queryProvider";
 import { IconCartProvider } from "@/context/iconCartProvider";
-
+import Sidebar from "@/components/layout/fetchSidebarItems";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -23,7 +22,7 @@ export default function RootLayout({
 
   return (
     <html lang="en" data-lt-installed="true">
-        <body >
+        <body className={inter.className}>
       <QueryProvider>
         <IconCartProvider>
           <div className="flex flex-col h-screen max-w-screen">

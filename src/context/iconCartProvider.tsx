@@ -1,7 +1,7 @@
 "use client"
 import { toast } from "@/hooks/use-toast"
-import { IconData } from "@/hooks/useFetchIconLibrary"
 import { copyCommand } from "@/lib/copyCommand "
+import { IconData } from "@/lib/types"
 import { createContext, useContext, useCallback, useMemo, useState } from "react"
 
 type IconCartContextType = {
@@ -29,7 +29,7 @@ const IconCartProvider = ({ children }: { children: React.ReactNode }) => {
     const [cartIcons, setCartIcons] = useState<IconData[]>([])
     const [multiSelect, setMultiSelect] = useState(false)
 
-    // Memoize isInCart function to prevent unnecessary re-renders
+    // Memoize addRemoveIcon function
     const isInCart = useCallback((icon: IconData) => {
         return cartIcons.some((i) => i.name === icon.name)
     }, [cartIcons])

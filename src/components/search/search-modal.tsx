@@ -19,7 +19,7 @@ export function SearchModal({ open, onOpenChange }: SearchModalProps) {
   const [selectedIcon, setSelectedIcon] = useState<any>(null);
   const [showIconDialog, setShowIconDialog] = useState(false);
   const [keyPress, setKeyPress] = useState<Set<string>>(new Set<string>());
-  const { addRemoveIcon,multiSelect } = useIconCart()
+  const { addRemoveIcon,multiSelect,isInCart } = useIconCart()
 
   useEffect(() => {
     window.addEventListener("keydown", (e) => {
@@ -121,8 +121,9 @@ export function SearchModal({ open, onOpenChange }: SearchModalProps) {
           <IconDialog
             icon={selectedIcon}
             pathname={selectedIcon.library.toLowerCase()}
-            addToCart={addRemoveIcon}
+            addRemoveIcon={addRemoveIcon}
             multiSelect={multiSelect}
+            isInCart={isInCart}
           />
 
         )}

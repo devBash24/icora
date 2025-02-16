@@ -52,7 +52,7 @@ export function Header() {
 
             <Button variant="ghost" size="icon" asChild>
               <Link 
-                href={process.env.NEXT_PUBLIC_GITHUB_URL || "https://github.com/devBash24/Icora-web"} 
+                href={process.env.NEXT_PUBLIC_GITHUB_URL || "https://github.com/devBash24/Icora"} 
                 target="_blank"
               >
                 <Github className="h-5 w-5" />
